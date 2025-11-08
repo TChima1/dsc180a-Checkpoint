@@ -1,121 +1,118 @@
-# dsc180a-Checkpoint
-# DSC 180A Q1 Capstone - AI in Drug Discovery
+# DSC 180A Capstone - AI in Drug Discovery
 
-**Student:** Taranvir Chima  
-**Email:** tchima@ucsd.edu  
-**Mentor:** Murali Krishnam (Solix Technologies)  
-**Domain:** AI Applications in Drug Discovery (B23)
+This project explores AI applications in drug discovery through analysis of medical dialogues and biomedical literature using large language models.
+ 
+**Mentor:** Murali Krishnam, Dr. Justin Eldridge , Murali Krishnam
 
-## Project Overview
+---
 
-This project explores AI applications in drug discovery through hands-on analysis of medical dialogues and biomedical literature. We investigate how large language models can extract structured information from unstructured medical text and identify potential drug repurposing candidates.
 
-## Repository Structure
-```
-.
-├── week2_medical_dialogue.py    # Medical dialogue analysis with semlib
-├── week3_pubmed_fetching.py     # PubMed literature mining
-├── week2_semlib_results.csv     # Week 2 output
-├── alzheimers_repurposing_abstracts.csv  # Week 3 output
-└── README.md
-```
+- `week2_medical_dialogue.py` - Analyzes patient-doctor conversations from MTS-Dialog
+- `week3_pubmed_repurposing.py` - Extracts drug repurposing candidates from PubMed abstracts
 
-## Week 2: Medical Dialogue Analysis
+---
 
-Analyzes patient-doctor conversations from the MTS-Dialog dataset to extract:
-- Chief complaints
-- Medications mentioned
-- Diabetes mentions
-- Lifestyle/diet/exercise discussions
+## Setup
 
-**Research Question:** Do diabetes conversations mention diet, exercise, or lifestyle changes? What proportion discuss medication vs. lifestyle management?
-
-### Setup
-
-**Dependencies:**
+### 1. Clone repository
 ```bash
-py -m pip install pandas semlib
+git clone https://github.com/TChima1/dsc180a-Checkpoint.git
+cd dsc180a-Checkpoint
 ```
 
-**Set API Key:**
+### 2. Install dependencies
+```bash
+py -m pip install pandas semlib biopython
+```
+
+**What each package does:**
+- `pandas` - Data manipulation and CSV handling
+- `semlib` - LLM-based semantic extraction framework
+- `biopython` - PubMed API access
+
+### 3. Set environment variables
+
+**Windows Command Prompt:**
 ```cmd
-# Windows Command Prompt
 set OPENAI_API_KEY=your-api-key-here
+```
 
-# Windows PowerShell
+**Windows PowerShell:**
+```powershell
 $env:OPENAI_API_KEY="your-api-key-here"
+```
 
-# Mac/Linux
+**Mac/Linux:**
+```bash
 export OPENAI_API_KEY="your-api-key-here"
 ```
+
+---
+
+
+
+### Medical Dialogue Analysis
+
+Analyzes 1,201 patient-doctor conversations from the MTS-Dialog dataset.
+
+**Data Source:** Downloads automatically from https://github.com/abachaa/MTS-Dialog  
+(Or manually download `MTS-Dialog-TrainingSet.csv` and place in project directory)
 
 **Run:**
 ```bash
 py week2_medical_dialogue.py
 ```
 
-**Note:** This code uses the OpenAI API via semlib. Running the full analysis (1201 conversations) costs approximately $5-6.
 
-### Data
-
-Download the MTS-Dialog dataset:
-- Source: https://github.com/abachaa/MTS-Dialog
-- File: `MTS-Dialog-TrainingSet.csv`
-- Place in same directory as script
 
 ---
 
-## Week 3: PubMed Literature Mining
+### PubMed Literature Mining
 
-Queries PubMed for abstracts related to Alzheimer's disease and drug repurposing using the NCBI E-utilities API.
+Retrieves 50 PubMed abstracts on Alzheimer's drug repurposing.
 
-### Setup
-
-**Dependencies:**
-```bash
-py -m pip install biopython pandas
+**Before running:** Update `Entrez.email` in script (line 18) to your email address:
+```python
+Entrez.email = "youremail@ucsd.edu"  # Required by NCBI
 ```
 
 **Run:**
 ```bash
-py week3_pubmed_fetching.py
+py week3_pubmed_repurposing.py
 ```
 
-**Note:** Update the email address in the script (line 13) to your own email before running.
 
-### Output
 
-Generates `alzheimers_repurposing_abstracts.csv` containing:
-- PubMed IDs
-- Article titles
-- Abstracts
-- Publication years
+## Reproducibility
+
+To reproduce results:
+
+1. **Clone repository**
+```bash
+   git clone https://github.com/TChima1/dsc180a-Checkpoint.git
+   cd dsc180a-Checkpoint
+```
+
+2. **Install dependencies**
+```bash
+   py -m pip install pandas semlib biopython
+```
+
+3. **Set API key**
+```bash
+   set OPENAI_API_KEY=your-api-key-here
+```
+
+4. **Update email in Week 3** (line 18)
+```python
+   Entrez.email = "youremail@ucsd.edu"
+```
+
+5. **Run scripts**
+```bash
+   py week2_medical_dialogue.py
+   py week3_pubmed_repurposing.py
+```
 
 ---
 
-## Results Summary
-
-### Week 2 Findings
-- **Top 5 Medications:** [Will be filled after running]
-- **Diabetes Conversations:** [Will be filled after running]
-- **Lifestyle vs. Medication:** [Will be filled after running]
-
-### Week 3 Findings
-- Retrieved 50+ abstracts on Alzheimer's drug repurposing
-- Prepared dataset for LLM-based analysis in future work
-
----
-
-## Future Work
-
-- Integrate semlib with PubMed abstracts for drug candidate extraction
-- Validate findings against DrugBank database
-- Explore ontology-grounded approaches for improved predictions
-
----
-
-## References
-
-- MTS-Dialog Dataset: https://github.com/abachaa/MTS-Dialog
-- PubMed API: https://www.ncbi.nlm.nih.gov/home/develop/api/
-- Semlib Documentation: https://semlib.anish.io/
