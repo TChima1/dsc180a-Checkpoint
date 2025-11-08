@@ -1,8 +1,8 @@
 # dsc180a-Checkpoint
 # DSC 180A Q1 Capstone - AI in Drug Discovery
 
-**Student:** [Your Name]  
-**Email:** [youremail@ucsd.edu]  
+**Student:** Taranvir Chima  
+**Email:** tchima@ucsd.edu  
 **Mentor:** Murali Krishnam (Solix Technologies)  
 **Domain:** AI Applications in Drug Discovery (B23)
 
